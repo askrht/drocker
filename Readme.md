@@ -26,7 +26,7 @@ The instructions below have been tested on Ubuntu 16.04. Adapt them as required 
     ```
 
 # Useful links and folders
-1. You can access RStudio at localhost:8787
+1. You can access RStudio at localhost:8787. It takes about 2 minutes for it to launch, the first time.
 1. RStudio files are saved under /docs
 
 # Adding your packages to the Docker image
