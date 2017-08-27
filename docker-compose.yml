@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+
+  drocker:
+    build: drocker/
+    volumes:
+      - ./docs:/home/rstudio/docs
+    ports:
+      - "8787:8787"
