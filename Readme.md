@@ -18,7 +18,7 @@ The instructions below have been tested on Ubuntu 16.04. Adapt them as required 
 1. Start the docker image. This downloads approximately 4 GB of Docker images, first time.
     ```
     cd drocker
-    docker-compose -d up
+    docker-compose up -d
     ```
 1. Stop the containers when you are done
     ```
@@ -33,7 +33,7 @@ The instructions below have been tested on Ubuntu 16.04. Adapt them as required 
 1. Modify drocker/Dockerfile
 1. Stop the container, remove the exsiting drocker image and bring it up again
     ```
-    docker-compose down && docker rmi drocker_drocker && docker-compose -d up
+    docker-compose down && docker rmi drocker_drocker && docker-compose up -d
     ```
 1. You can enter the running container to check which packges are installed, like so:
     ```
