@@ -18,7 +18,7 @@ The instructions below have been tested on Ubuntu 16.04. Adapt them as required 
 1. Start the docker image. This downloads approximately 4 GB of Docker images, first time.
     ```
     cd drocker
-    docker-compose up -d
+    docker-compose up -d --build
     ```
 1. Stop the containers when you are done
     ```
@@ -30,14 +30,14 @@ The instructions below have been tested on Ubuntu 16.04. Adapt them as required 
 1. RStudio files are saved under /docs
 
 # Adding your packages to the Docker image
-1. Modify drocker/Dockerfile
-1. Stop the container, remove the exsiting drocker image and bring it up again
+1. Modify ropensci/Dockerfile
+1. Stop the container, remove the exsiting drocker_ropensci image and bring it up again
     ```
-    docker-compose down && docker rmi drocker_drocker && docker-compose up -d
+    docker-compose down && docker rmi drocker_ropensci && docker-compose up -d
     ```
 1. You can enter the running container to check which packges are installed, like so:
     ```
-    docker exec -it drocker_drocker_1 bash
+    docker exec -it drocker_ropensci bash
     R
     > library("tidyverse")
     > installed.packages() %>% grep(pattern="gsheet") %>% installed.packages()[.]
