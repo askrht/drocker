@@ -2,8 +2,8 @@ version: '2'
 services:
   drocker:
     build: ./ropensci
-    image: drocker_ropensci
-    container_name: drocker_ropensci
+    image: drocker-ropensci
+    container_name: drocker-ropensci
     volumes:
       - ./docs:/home/rstudio/docs
     ports:

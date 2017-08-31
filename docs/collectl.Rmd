@@ -1,0 +1,45 @@
+---
+title: "collectl"
+output: html_document
+---
+
+```{r readData, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("tidyverse")
+library("ggplot2")
+library("scales")
+library("gsheet")
+start.time <- Sys.time()
+df <- gsheet2tbl(url = 'https://docs.google.com/spreadsheets/d/1XGnSn8BB0ajoUG7Rzr_umtaNy_Rjl1103jhzFtzjKzI/edit?usp=sharing')
+df$x <- df[,3]
+df[,1:3] <- NULL
+```
+
+## Plots
+
+```{r allPlots, eval=TRUE, echo=FALSE, error=FALSE, warning=FALSE}
+upto <- 10
+lastCol <- min(ncol(df), upto)
+numMetrics <-  lastCol -1
+for(i in 1:lastCol) {
+  nme <- colnames(df)[i]
+  if (nme == "x") next
+    p <- ggplot(data = df, aes_string(x = "x", y = nme)) +
+      geom_line() +
+      scale_x_datetime(breaks = date_breaks("1 hour"),
+                       labels = date_format("%H:%M")) +
+      xlab("Time") + ylab(nme) +
+      geom_smooth(method = "gam")
+    print(p)
+  }
+```
+
+## Summary
+
+```{r summary, eval=TRUE, echo=FALSE}
+summary(df)
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+```
+
+It took `r time.taken` mins/secs to plot `r nrow(df)` data points for `r numMetrics` metrics.

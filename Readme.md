@@ -31,13 +31,13 @@ The instructions below have been tested on Ubuntu 16.04. Adapt them as required 
 
 # Adding your packages to the Docker image
 1. Modify ropensci/Dockerfile
-1. Stop the container, remove the exsiting drocker_ropensci image and bring it up again
+1. Stop the container, remove the exsiting drocker-ropensci image and bring it up again
     ```
-    docker-compose down && docker rmi drocker_ropensci && docker-compose up -d
+    docker-compose down && docker rmi drocker-ropensci && docker-compose up -d
     ```
 1. You can enter the running container to check which packges are installed, like so:
     ```
-    docker exec -it drocker_ropensci bash
+    docker exec -it drocker-ropensci bash
     R
     > library("tidyverse")
     > installed.packages() %>% grep(pattern="gsheet") %>% installed.packages()[.]

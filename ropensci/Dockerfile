@@ -4,4 +4,4 @@ RUN mkdir -p /home/rstudio/docs && \
   chmod 777 /home/rstudio/docs && \
   mkdir -p /srv/shiny-server && \
   ln -s /home/rstudio/docs /srv/shiny-server/docs && \
-  R -e 'out <- install.packages(c("gsheet"))'
+  R -e 'install.packages(c("gsheet"))'
