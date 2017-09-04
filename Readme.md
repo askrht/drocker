@@ -4,6 +4,12 @@
 
 The instructions below have been tested on Ubuntu 16.04. Adapt them as required for your own OS.
 
+Use this convenient wrapper to maintain a versioned infrastructure for your RStudio projects.
+
+`but it works on my machine` is history.
+
+`/docs/collectl.Rmd` shows how to share large data files using Google Sheets, free storage.
+
 # Start Here
 
 1. Download and install [Docker](https://www.docker.com/get-docker). Community Edition will work fine.
@@ -25,21 +31,23 @@ The instructions below have been tested on Ubuntu 16.04. Adapt them as required 
     docker-compose down
     ```
 
-# Useful links and folders
-1. You can access RStudio at localhost:8787. It takes about 2 minutes for it to launch, the first time. Login as rstudio / rstudio.
-1. RStudio files are saved under /docs
+# After starting the container
+1. You can access RStudio at localhost:8787. It takes about 2 minutes for it to launch, the first time. Login as **rstudio / rstudio**.
+1. RStudio files should be saved under the `/docs` folder.
 
-# Adding your packages to the Docker image
-1. Modify ropensci/Dockerfile
-1. Stop the container, remove the exsiting drocker-ropensci image and bring it up again
-    ```
-    docker-compose down && docker rmi drocker-ropensci && docker-compose up -d
-    ```
-1. You can enter the running container to check which packges are installed, like so:
+# Restore user preferences (optional)
+User preferences for RStudio are not restored if you rebuild the Docker image. To restore the user preferences, follow the steps given below.
+1. Customize `docs/user-preferences`.
+1. Login in to Rstudio as described above. (Very important or you will need to rebuild)
+1. Enter the container and execute `./bootup` script
     ```
     docker exec -it drocker-ropensci bash
-    R
-    > library("tidyverse")
-    > installed.packages() %>% grep(pattern="gsheet") %>% installed.packages()[.]
-    [1] "gsheet"
+    cd /home/rstudio/docs && ./bootup
+    ```
+
+# Adding your packages to the Docker image (optional)
+1. Modify ropensci/Dockerfile to install additional packages.
+1. Stop the container, remove the existing drocker-ropensci image and bring it up again.
+    ```
+    docker-compose down && docker rmi drocker-ropensci && docker-compose up -d
     ```

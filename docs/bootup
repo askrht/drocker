@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cat user-settings >> /home/rstudio/.rstudio/monitored/user-settings/user-settings
+chown rstudio:rstudio /home/rstudio/.rstudio/monitored/user-settings/user-settings
