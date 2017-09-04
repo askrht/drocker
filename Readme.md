@@ -1,12 +1,12 @@
 # About
 
-**drocker** is a docker-compose wrapper on top of [rocker/ropensci](https://github.com/rocker-org/ropensci) This is a starting point for a new R project.
-
-The instructions below have been tested on Ubuntu 16.04. Adapt them as required for your own OS.
-
 Use this convenient wrapper to maintain and to share a versioned infrastructure for your RStudio projects.
 
 No more *... but it works on my machine*.
+
+**drocker** is a docker-compose wrapper on top of [rocker/ropensci](https://github.com/rocker-org/ropensci) This is a starting point for a new R project.
+
+The instructions below have been tested on Ubuntu 16.04. Adapt them as required for your own OS.
 
 `/docs/collectl.Rmd` shows how to share large data files using Google Sheets, free storage.
 
