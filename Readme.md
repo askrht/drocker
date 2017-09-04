@@ -4,9 +4,9 @@
 
 The instructions below have been tested on Ubuntu 16.04. Adapt them as required for your own OS.
 
-Use this convenient wrapper to maintain a versioned infrastructure for your RStudio projects.
+Use this convenient wrapper to maintain and to share a versioned infrastructure for your RStudio projects.
 
-`but it works on my machine` is history.
+No more *... but it works on my machine*.
 
 `/docs/collectl.Rmd` shows how to share large data files using Google Sheets, free storage.
 
@@ -46,7 +46,7 @@ User preferences for RStudio are not restored if you rebuild the Docker image. T
     ```
 
 # Adding your packages to the Docker image (optional)
-1. Modify ropensci/Dockerfile to install additional packages.
+1. Modify `ropensci/Dockerfile` to install additional packages.
 1. Stop the container, remove the existing drocker-ropensci image and bring it up again.
     ```
     docker-compose down && docker rmi drocker-ropensci && docker-compose up -d
