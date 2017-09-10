@@ -1,2 +1,2 @@
-/docs/*.html
+/docs/**/*.html
 /docs/*.pdf
