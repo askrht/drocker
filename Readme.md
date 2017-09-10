@@ -51,3 +51,5 @@ User preferences for RStudio are not restored if you rebuild the Docker image. T
     ```
     docker-compose down && docker rmi drocker-ropensci && docker-compose up -d
     ```
+# Contribution
+1. Caret examples are from [Earl Glynn's talk](https://github.com/EarlGlynn/kc-r-users-caret-2017)
