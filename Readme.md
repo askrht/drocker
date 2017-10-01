@@ -14,8 +14,14 @@ The instructions below have been tested on Ubuntu 16.04. Adapt them as required 
 
 1. Download and install [Docker](https://www.docker.com/get-docker). Community Edition will work fine.
     ```
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
     sudo apt update
     sudo apt install docker-ce docker-compose
+    sudo systemctl status docker
+    sudo usermod -aG docker ${USER} # add your id to docker group
+    su - ${USER} # re-login
+    id -nG # chekc if you are in docker group
     ```
 1. Clone this repo
     ```
