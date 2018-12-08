@@ -33,4 +33,21 @@ RUN mkdir -p /home/rstudio/docs && \
   pROC \
   ipred \
   gbm \
-  && rm -rf /tmp/downloaded_packages /tmp/*.rds
+  mlbench \
+  rpivotTable \
+  dygraphs \
+  gsubfn \
+  flexdashboard \
+  tictoc \
+  knitr \
+  rmarkdown \
+  properties \
+  stringr \
+  widgetframe \
+  bookdown \
+  DiagrammeR \
+  collapsibleTree \
+  anomalize \
+  tidyr \
+  && R -e 'out <- devtools::install_github("rich-iannone/DiagrammeR")' && \
+  rm -rf /tmp/downloaded_packages /tmp/*.rds
