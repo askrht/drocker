@@ -31,7 +31,7 @@ The instructions below have been tested on Ubuntu 16.04. Adapt them as required 
     vi ropensci/Dockerfile # add or remove R packages here
     docker-compose build # to build an image
     docker run -d -p 8787:8787 -e USER=$USER -e PASSWORD=welcome -v $PWD/docs:/home/$USER/docs --name r1 drocker-ropensci # spin up first RStudio
-    docker run -d -p 8788:8787 -e USER=$USER -e PASSWORD=welcome -v $PWD/docs:/home/$USER/docs --name r3 drocker-ropensci # spin up second RStudio
+    docker run -d -p 8788:8787 -e USER=$USER -e PASSWORD=welcome -v $PWD/docs:/home/$USER/docs --name r2 drocker-ropensci # spin up second RStudio
     docker rm -f r1 r2 # kill and remove containers
     docker rmi drocker-ropensci # remove the image
     ```
