@@ -1,0 +1,89 @@
+---
+title: 'SAR Plots'
+output:
+  html_document:
+    fig_height: 3
+    fig_width: 8
+    toc: no
+---
+
+```{r setup, eval=TRUE, include=FALSE, echo=FALSE, results="asis", message=FALSE, warning=FALSE, fig.cap=T} 
+library(DiagrammeR)
+library(htmltools)
+library(tidyverse)
+library(DiagrammeR)
+library(scales)
+library(dygraphs)
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+library("stringr")
+lookback_days <- 7
+knitr::opts_chunk$set(eval=TRUE, echo=FALSE, include=TRUE, results="asis", message=FALSE, warning=FALSE)
+```
+
+### **CPU**. 99% quantile. 
+
+```{r}
+# date time   CPU %user %nice %system %iowait %steal %idle
+# 2018-10-15 12:00:07   all 0.98 0.00 0.94 0.01 0.00 98.07
+cpu <-
+list.files('~/docs', 'CPU\\.dat', full.names=T, recursive=T) %>%
+  tibble(File = .) %>%
+  mutate(Data = lapply(File, read_table2, col_names=T)) %>%
+  unnest(Data) %>%
+  mutate(busy = round(100 - `%idle`)) %>% select(date, busy) %>% na.omit() %>%
+  group_by(date) %>% summarize(busy = round(quantile(busy,  0.99, na.rm=TRUE))) %>% arrange(desc(date))
+cpu_start_dt <- as.POSIXct(max(cpu$date) - lookback_days, "UTC")
+cpu_end_dt <- as.POSIXct(max(cpu$date), "UTC")
+cpu %>%
+  as.data.frame() %>%
+  ungroup() %>% remove_rownames %>% column_to_rownames(var="date") %>%
+  dygraph(main="CPU %busy", group="sar") %>%
+  dyRangeSelector(dateWindow=c(cpu_start_dt, cpu_end_dt))
+rm(cpu)
+```
+
+### **Runqueue**. Number of kernel threads in memory that are waiting for a CPU to run. 99% quantile 
+
+```{r}
+# date time   runq-sz plist-sz ldavg-1 ldavg-5 ldavg-15 blocked
+# 2018-10-02 22:00:08   0 815 0.04 0.08 0.12 0
+list.files('~/docs', 'runq-sz\\.dat', full.names=T, recursive=T) %>%
+  tibble(File = .) %>%
+  mutate(Data = lapply(File, read_table2, col_names=T)) %>%
+  unnest(Data) %>%
+  mutate(runqsz = round(`runq-sz`)) %>%
+  select(date, runqsz) %>%
+  na.omit() %>%
+  group_by(date) %>%
+  summarize(runqsz = round(quantile(runqsz, 0.99, na.rm=TRUE))) %>%
+  ungroup() %>%
+  arrange(desc(date)) %>%
+  as.data.frame() %>%
+  remove_rownames %>% column_to_rownames(var="date") %>%
+  dygraph(main="runq-sz", group = "sar") %>%
+  dyLegend(width = 400) %>%
+  dyRangeSelector(dateWindow=c(cpu_start_dt, cpu_end_dt))
+```
+
+### **Disk**. 99% quantile.
+
+```{r}
+# date time   DEV tps rd_sec/s wr_sec/s avgrq-sz avgqu-sz await svctm %util
+# 2018-10-01 12:00:08   dev248-0 11.80 0.00 376.00 31.86 0.00 0.34 0.19 0.22
+list.files('~/docs', 'DEV\\.dat', full.names=T, recursive=T) %>%
+  tibble(File = .) %>%
+  mutate(Data = lapply(File, read_table2, col_names=T)) %>%
+  unnest(Data) %>%
+  mutate(util = round(`%util`)) %>%
+  select(date, util) %>%
+  na.omit() %>%
+  group_by(date) %>%
+  summarize(util = round(quantile(util,  0.99, na.rm=TRUE))) %>%
+  ungroup() %>%
+  arrange(desc(date)) %>%
+  as.data.frame() %>%
+  remove_rownames %>% column_to_rownames(var="date") %>%
+  dygraph(main="Disk %util", group = "sar") %>%
+  dyLegend(width = 400) %>%
+  dyRangeSelector(dateWindow=c(cpu_start_dt, cpu_end_dt))
+```
