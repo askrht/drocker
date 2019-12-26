@@ -12,6 +12,7 @@ RUN mkdir -p /home/rstudio/docs && \
   chmod 777 /home/rstudio/docs && \
   mkdir -p /srv/shiny-server && \
   ln -s /home/rstudio/docs /srv/shiny-server/docs && \
+  export ADD=shiny && bash /etc/cont-init.d/add && \
   install2.r --error \
   gsheet \
   ranger \
@@ -20,7 +21,6 @@ RUN mkdir -p /home/rstudio/docs && \
   Boruta \
   rFerns \
   C50 \
-  glmnet \
   RWeka \
   DMwR \
   fastICA \
@@ -39,7 +39,6 @@ RUN mkdir -p /home/rstudio/docs && \
   gsubfn \
   flexdashboard \
   tictoc \
-  knitr \
   rmarkdown \
   properties \
   stringr \
