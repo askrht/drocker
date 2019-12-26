@@ -26,7 +26,8 @@ User preferences for RStudio are not restored if you rebuild the Docker image. T
     $ make
     all                            setup start
     setup                          Build the docker image
+    ssh                            Opens a terminal into the container
     start                          Start rstudio
     stop                           Stop the container
     ```
-    Rstudio is at port 8787. Login with your unix user name. Password is welcome.
+    Rstudio is at port 8787. Login with your unix user name. Password is welcome. Shiny is at port 3838 serving /srv/shiny-server/
