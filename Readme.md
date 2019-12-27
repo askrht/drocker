@@ -21,5 +21,5 @@ User preferences for RStudio are not restored if you rebuild the Docker image. T
     docker exec -it drocker-ropensci bash
     cd /home/rstudio/docs && ./bootup
     ```
-1. Password is welcome. Change the password inside `.makerc` but do not check in this file. `echo welcome > .makerc`
+1. Password is welcome. Change the password inside `.makerc` but do not check in this file. `echo "PASSWORD=welcome" > .makerc`
 1. Execute `make setup start`. Rstudio is at port 8787. Login with your unix user name. Shiny is at port 3838 serving /srv/shiny-server/
