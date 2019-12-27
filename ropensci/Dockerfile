@@ -48,5 +48,6 @@ RUN mkdir -p /home/rstudio/docs && \
   collapsibleTree \
   anomalize \
   tidyr \
+  sna \
   && R -e 'out <- devtools::install_github("rich-iannone/DiagrammeR")' && \
   rm -rf /tmp/downloaded_packages /tmp/*.rds
