@@ -8,8 +8,7 @@ ADD Makevars /usr/local/lib/R/.R/
 ENV CC=/usr/bin/gcc \
   CXX=/usr/bin/g++ \
   CXX1X=/usr/bin/g++
-RUN mkdir -p /home/rstudio/docs && \
-  chmod 777 /home/rstudio/docs && \
+RUN mkdir -p /home/rstudio/docs && chmod 777 /home/rstudio/docs && \
   mkdir -p /srv/shiny-server && \
   ln -s /home/rstudio/docs /srv/shiny-server/docs && \
   export ADD=shiny && bash /etc/cont-init.d/add && \
