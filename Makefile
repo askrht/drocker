@@ -15,5 +15,6 @@ ssh: ## Opens a terminal into the container
 	@docker exec -it -u ${USER} drocker bash
 start: ## Start rstudio
 	@docker run -d -p 3838:3838 -p 8787:8787 -e ROOT=TRUE -e USERID=`id -u` -e GROUPID=`id -g` -e UMASK=0022 -e USER=${USER} -e PASSWORD=${PASSWORD} -v `dirname $(shell pwd -P)`:/home/${USER}/workplace --name drocker drocker-ropensci
+	@sleep 10
 stop: ## Stop the container
 	-@docker rm -f drocker 2> /dev/null # kill and remove container
